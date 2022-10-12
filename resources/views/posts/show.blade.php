@@ -10,6 +10,7 @@
                     <th scope="col">Slug</th>
                     <th scope="col">Description</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Tags</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,8 +20,18 @@
                     <td>{{$post->slug}}</td>
                     <td>{{$post->description}}</td>
                     <td>
-                        {{($post->category)?$post->category->name:'-'}}
+                        {{($post->category)?$post->category->name:' - '}}
                     </td>
+                    <td>
+                        @if (count($post->tags))
+                            @foreach ($post->tags as $tag)
+                                {{$tag->name}} |
+                            @endforeach
+                        @else
+                            <span> - </span>
+                        @endif
+                    </td>
+
                     <td class="actions">
                         <a 
                         href="{{route('admin.posts.index')}}"
