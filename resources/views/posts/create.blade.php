@@ -9,7 +9,7 @@
             @csrf
 
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">Titolo</label>
                 <input 
                 type="text"
                 class="form-control"
@@ -26,7 +26,7 @@
             </div>
             
             <div class="mb-3">
-                <label for="description">Description</label>
+                <label for="description">Descrizione</label>
                 <textarea 
                 name="description"
                 id="description"
@@ -42,7 +42,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="category">Category</label>
+                <label for="category">Categoria</label>
 
                 <select 
                 name="category_id"

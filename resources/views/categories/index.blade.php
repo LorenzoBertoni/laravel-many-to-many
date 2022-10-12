@@ -27,6 +27,8 @@
 {{-- ***Alert stampati in caso di inserimento/modifica 
             *dei dati nel DB --}}
     <div class="container">
+        <h1 class="text-primary mb-3">Categorie</h1>
+
         <div class="actions container d-flex justify-content-end">
             <a 
             href="{{route('admin.categories.create', ['category' => $categories])}}"
@@ -40,7 +42,7 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Slug</th>
                 </tr>
             </thead>

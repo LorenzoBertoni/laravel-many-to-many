@@ -27,11 +27,13 @@
 {{-- ***Alert stampati in caso di inserimento/modifica 
             *dei dati nel DB --}}
     <div class="container">
+        <h1 class="text-primary mb-3">Post</h1>
+
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Title</th>
+                    <th scope="col">Titolo</th>
                     <th scope="col">Slug</th>
                 </tr>
             </thead>
