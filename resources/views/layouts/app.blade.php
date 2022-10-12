@@ -52,6 +52,14 @@
                             <li class="nav-item">
                                 <a 
                                 class="nav-link btn btn-success text-light" 
+                                href="{{ route('admin.categories.index') }}"
+                                >
+                                    Gestione Categorie
+                                </a>
+                            </li>
+                            <li class="nav-item ml-2">
+                                <a 
+                                class="nav-link btn btn-success text-light" 
                                 href="{{ route('admin.posts.index') }}"
                                 >
                                     Gestione Post

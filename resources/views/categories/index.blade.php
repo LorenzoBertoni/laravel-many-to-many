@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- ***Alert stampati in caso di inserimento/modifica 
-            *dei dati nel DB --}}
+    *dei dati nel DB --}}
     <div class="container">
         @if (session('created'))
             <div class="alert alert-success">
@@ -27,35 +27,38 @@
 {{-- ***Alert stampati in caso di inserimento/modifica 
             *dei dati nel DB --}}
     <div class="container">
+        <div class="actions container d-flex justify-content-end">
+            <a 
+            href="{{route('admin.categories.create', ['category' => $categories])}}"
+            class="btn btn-primary mb-3"
+            >
+                + Crea nuova categoria
+            </a>
+        </div>
+
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Title</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Slug</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($posts as $post)
+                @foreach ($categories as $category)
                     <tr>
-                        <th scope="row">{{$post->id}}</th>
-                        <td>{{$post->title}}</td>
-                        <td>{{$post->slug}}</td>
+                        <th scope="row">{{$category->id}}</th>
+                        <td>{{$category->name}}</td>
+                        <td>{{$category->slug}}</td>
                         <td class="actions p-2 d-flex justify-content-center align-items-center">
                             <a 
-                            href="{{route('admin.posts.show', ['post' => $post])}}"
-                            class="btn btn-primary ml-3"
-                            >
-                                Vedi Info
-                            </a>
-                            <a 
-                            href="{{route('admin.posts.edit', ['post' => $post])}}"
-                            class="btn btn-warning ml-3"
+                            href="{{route('admin.categories.edit', ['category' => $category])}}"
+                            class="btn btn-warning"
                             >
                                 Modifica
                             </a>
                             <form 
-                            action="{{route('admin.posts.destroy', ['post' => $post])}}"
+                            action="{{route('admin.categories.destroy', ['category' => $category])}}"
                             method="POST"
                             >
                                 @csrf
