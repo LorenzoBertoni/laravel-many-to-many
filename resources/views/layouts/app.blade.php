@@ -49,7 +49,15 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
+                            <li class="nav-item ml-2">
+                                <a 
+                                class="nav-link btn btn-success text-light" 
+                                href="{{ route('admin.tags.index') }}"
+                                >
+                                    Gestione Tag
+                                </a>
+                            </li>
+                            <li class="nav-item ml-2">
                                 <a 
                                 class="nav-link btn btn-success text-light" 
                                 href="{{ route('admin.categories.index') }}"
