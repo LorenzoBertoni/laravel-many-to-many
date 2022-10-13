@@ -34,14 +34,14 @@
                             >
                                 Vedi correlati
                             </a>
-                            {{-- <a 
-                            href="{{route('admin.categories.edit', ['category' => $category])}}"
+                            <a 
+                            href="{{route('admin.tags.edit', ['tag' => $tag])}}"
                             class="btn btn-warning ml-3"
                             >
                                 Modifica
                             </a>
                             <form 
-                            action="{{route('admin.categories.destroy', ['category' => $category])}}"
+                            action="{{route('admin.tags.destroy', ['tag' => $tag])}}"
                             method="POST"
                             >
                                 @csrf
@@ -55,7 +55,7 @@
                                     Elimina
                                 </button>
                             </form>
-                        </td> --}}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

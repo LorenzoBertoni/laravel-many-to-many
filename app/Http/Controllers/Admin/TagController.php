@@ -73,9 +73,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        return view('tags.edit', ['tag' => $tag]);
     }
 
     /**
@@ -85,9 +85,21 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $data = $request->all();
+
+        if ($tag->name !== $data['name']) {
+            $data['slug'] = $this->getSlug($data['name']);
+        }
+
+        $tag->update($data);
+
+        return redirect()->route('admin.tags.index')->with('edited', 'Modifiche apportate correttamente');
     }
 
 
@@ -115,8 +127,11 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->posts()->detach();
+        $tag->delete();
+
+        return redirect()->route('admin.categories.index')->with('cancelled', 'Eliminazione avvvenuta con successo');
     }
 }
