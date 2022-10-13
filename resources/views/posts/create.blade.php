@@ -81,6 +81,10 @@
                         <input 
                         type="checkbox"
                         name="tags[]" 
+                        {{--SE è stato selezionato almeno un tag il browser risponde
+                                con un'array delle relative value
+                            ALTRIMENTI non ritorna nulla
+                        --}}
                         id="tag_{{$tag->id}}"
                         class="form-check-input"
                         value="{{$tag->id}}"

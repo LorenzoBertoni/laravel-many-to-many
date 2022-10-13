@@ -91,8 +91,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('posts.edit', ['post' => $post, 'categories' => $categories]);
+        return view('posts.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -107,7 +108,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'exists:tags,id'
         ]);
         $data = $request->all();
 
@@ -116,6 +118,18 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        if (array_key_exists('tags', $data)) {
+            //* solo se 'tags' è definito nell'array 'data'
+            // se nessuna checkbox viene selezionata il valore di      ritorno è nullo e necessita di una condizione per evitare un errore
+            
+            $post->tags()->sync($data['tags']);
+        } else {
+            //* In caso di update con rimozione di tutti i tag
+            // se nessun tag viene selezionato il valore di ritorno sarà nullo. Di conseguenza non si verificherebbe la condizione dell'if e le modifiche non verrebbero registrate. Dato che in questo caso avverrebbe una rimozione di tutti i tag utilizziamo una detach() per ottenere il risultato sperato
+            
+            $post->tags()->detach();
+        }
 
         return redirect()->route('admin.posts.index')->with('edited', 'Modifiche apportate correttamente');
     }

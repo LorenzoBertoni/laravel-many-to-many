@@ -69,6 +69,47 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <h3 class="text-primary">
+                    Seleziona i tag appartenenti a questo post
+                </h3>
+
+                @foreach ($tags as $tag)
+                    <div class="form-group form-check">
+                        @if ($errors->any())
+                            <input 
+                            type="checkbox"
+                            name="tags[]" 
+                            id="tag_{{$tag->id}}"
+                            class="form-check-input"
+                            value="{{$tag->id}}"
+                            {{(in_array($tag->id, old('tags', [])))?'checked':''}}
+                            >
+                        @else
+                            <input 
+                            type="checkbox"
+                            name="tags[]" 
+                            id="tag_{{$tag->id}}"
+                            class="form-check-input"
+                            value="{{$tag->id}}"
+                            {{$post->tags->contains($tag)?'checked':''}}
+                            >
+                        @endif
+
+                        <label 
+                        for="tag_{{$tag->id}}"
+                        class="form-check-label"
+                        >
+                            {{$tag->name}}
+                        </label>
+                    </div>
+                @endforeach
+
+                @error('tags')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary">
                 Applica Modifiche
             </button>
