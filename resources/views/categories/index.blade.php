@@ -54,8 +54,14 @@
                         <td>{{$category->slug}}</td>
                         <td class="actions p-2 d-flex justify-content-center align-items-center">
                             <a 
+                            href="{{route('admin.categories.show', ['category' => $category])}}"
+                            class="btn btn-primary"
+                            >
+                                Vedi correlati
+                            </a>
+                            <a 
                             href="{{route('admin.categories.edit', ['category' => $category])}}"
-                            class="btn btn-warning"
+                            class="btn btn-warning ml-3"
                             >
                                 Modifica
                             </a>

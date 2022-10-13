@@ -29,6 +29,15 @@
     <div class="container">
         <h1 class="text-primary mb-3">Post</h1>
 
+        <div class="actions container d-flex justify-content-end">
+            <a 
+            class="btn btn-primary text-light"
+            href="{{route('admin.posts.create')}}"
+            >
+                + Crea Post
+            </a>
+        </div>
+
         <table class="table table-striped">
             <thead>
                 <tr>

@@ -65,14 +65,7 @@
                                     Gestione Post
                                 </a>
                             </li>
-                            <li class="nav-item ml-2 mr-2">
-                                <a 
-                                class="nav-link btn btn-primary text-light"
-                                href="{{route('admin.posts.create')}}"
-                                >
-                                    + Crea Post
-                                </a>
-                            </li>
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
