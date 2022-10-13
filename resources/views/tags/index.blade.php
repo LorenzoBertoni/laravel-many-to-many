@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- ***Alert stampati in caso di inserimento/modifica 
+    *dei dati nel DB --}}
+    <div class="container">
+        @if (session('created'))
+            <div class="alert alert-success">
+                {{session('created')}}
+            </div>
+        @endif
+    </div>
+    <div class="container">
+        @if (session('edited'))
+            <div class="alert alert-success">
+                {{session('edited')}}
+            </div>
+        @endif
+    </div>
+    <div class="container">
+        @if (session('cancelled'))
+            <div class="alert alert-danger">
+                {{session('cancelled')}}
+            </div>
+        @endif
+    </div>
+{{-- ***Alert stampati in caso di inserimento/modifica 
+            *dei dati nel DB --}}
     <div class="container">
         <h1 class="text-primary mb-3">Tag</h1>
 
