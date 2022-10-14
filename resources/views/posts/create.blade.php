@@ -5,6 +5,7 @@
         <form 
         action="{{route('admin.posts.store')}}" 
         method="POST"
+        enctype="multipart/form-data"
         >
             @csrf
 
@@ -81,8 +82,8 @@
                         <input 
                         type="checkbox"
                         name="tags[]" 
-                        {{--SE è stato selezionato almeno un tag il browser risponde
-                                con un'array delle relative value
+                        {{--
+                            SE è stato selezionato almeno un tag il browser     risponde con un'array delle relative value
                             ALTRIMENTI non ritorna nulla
                         --}}
                         id="tag_{{$tag->id}}"
@@ -103,6 +104,20 @@
                 @error('tags')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <div class="mb-3">
+                <h3 class="text-primary">
+                    Seleziona un immagine da caricare:
+                </h3>
+
+                <label for="image">File: </label>
+
+                <input 
+                type="file"
+                name="img_path" 
+                id="image"
+                >
             </div>
 
             <button type="submit" class="btn btn-primary">Crea</button>

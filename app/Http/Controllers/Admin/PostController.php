@@ -7,6 +7,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class PostController extends Controller
 {
@@ -47,16 +48,22 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'exists:tags,id'
+            'tags' => 'exists:tags,id',
+            'img_path' => 'nullable|image'
+
         ]);
+
         $data = $request->all();
+
+        $img = Storage::put('img', $data['img_path']);
+        $data['img_path'] = $img;
 
         $newPost = new Post();
         $newPost->fill($data);
         
         $slug = $this->getSlug($newPost->title);
         $newPost->slug = $slug;
-
+        
         $newPost->save();
 
         //*solo dopo aver salvato il nuovo post
@@ -64,6 +71,7 @@ class PostController extends Controller
 
         if (array_key_exists('tags', $data)) {
             //* solo se 'tags' è definito nell'array 'data'
+            // se nessuna checkbox viene selezionata non sarà presente un valore di ritorno, di conseguenza otterremmo un errore. Per ovviare utilizziamo la condizione per eseguire il codice solo se $data['tags] è definito.
             
             $newPost->tags()->sync($data['tags']);
         }
@@ -121,7 +129,7 @@ class PostController extends Controller
 
         if (array_key_exists('tags', $data)) {
             //* solo se 'tags' è definito nell'array 'data'
-            // se nessuna checkbox viene selezionata il valore di      ritorno è nullo e necessita di una condizione per evitare un errore
+            // se nessuna checkbox viene selezionata il valore di ritorno è nullo e necessita di una condizione per evitare un errore
             
             $post->tags()->sync($data['tags']);
         } else {
