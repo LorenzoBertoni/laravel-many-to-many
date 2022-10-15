@@ -55,8 +55,13 @@ class PostController extends Controller
 
         $data = $request->all();
 
-        $img = Storage::put('img', $data['img_path']);
-        $data['img_path'] = $img;
+        if (array_key_exists('img_path', $data)) {
+        //* solo se 'img_path' è definito nell'array 'data'
+        // evita "undefined index img_path"
+            $img = Storage::put('img', $data['img_path']);
+            //upload dell'immagine
+            $data['img_path'] = $img;
+        }
 
         $newPost = new Post();
         $newPost->fill($data);
@@ -117,13 +122,27 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'exists:tags,id'
+            'tags' => 'exists:tags,id',
+            'img_path' => 'nullable|image'
         ]);
+
         $data = $request->all();
 
         if ($post->title !== $data['title']) {
             $data['slug'] = $this->getSlug($data['title']);
         }
+
+       if (array_key_exists('img_path', $data)) {
+        //* solo se 'img_path' è definito nell'array 'data'
+        // evita "undefined index img_path"
+            if ($post->img_path) {
+                //se il post aveva un immagine
+                Storage::delete($post->img_path);
+            }
+            //update immagine
+            $img = Storage::put('img', $data['img_path']);
+            $data['img_path'] = $img;
+       }
 
         $post->update($data);
 

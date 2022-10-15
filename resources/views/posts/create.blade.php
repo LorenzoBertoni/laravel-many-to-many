@@ -111,13 +111,25 @@
                     Seleziona un immagine da caricare:
                 </h3>
 
-                <label for="image">File: </label>
+                <div class="input-group mt-3 mb-3">
+                    <input 
+                    type="file"
+                    name="img_path" 
+                    id="image"
+                    class="form-control"
+                    >
+                    
+                    <label 
+                    for="image"
+                    class="input-group-text"
+                    >
+                        File:
+                    </label>
+                </div>
 
-                <input 
-                type="file"
-                name="img_path" 
-                id="image"
-                >
+                @error('img_path')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Crea</button>

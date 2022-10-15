@@ -5,6 +5,7 @@
         <form 
         action="{{route('admin.posts.update', ['post' => $post])}}" 
         method="POST"
+        enctype="multipart/form-data"
         >
             @csrf
             @method('PUT')
@@ -106,6 +107,43 @@
                 @endforeach
 
                 @error('tags')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <h3 class="text-primary">
+                    Seleziona un immagine da caricare:
+                </h3>
+
+                @if ($post->img_path)
+                    <h4 class="text-success">
+                        Immagine corrente:
+                    </h4>
+
+                    <img 
+                    src="{{asset('storage/' . $post->img_path)}}" 
+                    alt="{{$post->title}}"
+                    class="img-fluid">
+                @endif
+                
+                <div class="input-group mt-3 mb-3">
+                    <input 
+                    type="file"
+                    name="img_path" 
+                    id="image"
+                    class="form-control"
+                    >
+                    
+                    <label 
+                    for="image"
+                    class="input-group-text"
+                    >
+                        File:
+                    </label>
+                </div>
+                
+                @error('img_path')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

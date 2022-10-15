@@ -6,6 +6,7 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Thumbnail</th>
                     <th scope="col">Titolo</th>
                     <th scope="col">Slug</th>
                     <th scope="col">Descrizione</th>
@@ -16,6 +17,22 @@
             <tbody>
                 <tr>
                     <th scope="row">{{$post->id}}</th>
+                    <th scope="row">
+                        @if ($post->img_path)
+                            <img 
+                            src="{{asset('storage/' . $post->img_path)}}" 
+                            alt="{{$post->title}}"
+                            class="img-fluid"
+                            >
+                        @else
+                            <img 
+                            src="{{asset('fallback-images/posts-fallback.jpg')}}" 
+                            alt="{{$post->title}}"
+                            class="img-fluid"
+                            >
+                        @endif
+                        
+                    </th>
                     <td>{{$post->title}}</td>
                     <td>{{$post->slug}}</td>
                     <td>{{$post->description}}</td>
